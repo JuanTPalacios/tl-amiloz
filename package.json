@@ -1,0 +1,26 @@
+{
+  "name": "tl-amiloz-test",
+  "version": "1.0.0",
+  "description": "Bienvenido a la prueba técnica para el puesto de Líder Técnico en nuestro negocio de préstamos. Esta prueba tiene como objetivo evaluar tu capacidad para diseñar e implementar un producto mínimo viable (MVP) de backend que simule un sistema de gestión de préstamos.",
+  "main": "index.ts",
+  
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint --fix --project ./tsconfig.json",
+    "start": "node build/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q build/index.js\""
+  },
+  "author": "JuanTPalacios",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.6",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "http": "^0.0.1-security"
+  }
+}
