@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Usuarios {
+  id        Int         @id @default(autoincrement())
+  nombre    String
+  apellido  String
+  email     String
+  telefono  String
+  rolId     Int
+  Ofertas   Ofertas[]
+  Prestamos Prestamos[]
+  Roles     Roles       @relation(fields: [rolId], references: [id])
+}
+
+model Roles {
+  id          Int        @id @default(autoincrement())
+  nombre      String
+  descripcion String
+  Usuarios    Usuarios[]
+}
+
+model Ofertas {
+  id        Int         @id @default(autoincrement())
+  titulo    String
+  monto     Int
+  plazo     String
+  quotas    Int
+  interes   Float
+  userId    Int
+  Prestamos Prestamos[]
+  Usuarios  Usuarios    @relation(fields: [userId], references: [id])
+}
+
+model Prestamos {
+  id               Int      @id @default(autoincrement())
+  fecha_aceptacion DateTime
+  aprobado         Boolean
+  fecha_aprobacion DateTime
+  entregado        Boolean
+  fecha_desembolso DateTime
+  userId           Int
+  ofertaId         Int
+  Cuotas           Cuotas[]
+  Ofertas          Ofertas  @relation(fields: [ofertaId], references: [id])
+  Usuarios         Usuarios @relation(fields: [userId], references: [id])
+}
+
+model Cuotas {
+  id            Int             @id @default(autoincrement())
+  descripcion   String
+  fecha_pago    DateTime
+  monto_inicial Float
+  monto_pagado  Float
+  pendiente     Boolean
+  prestamoId    Int
+  Transacciones Transacciones[]
+  Prestamos     Prestamos       @relation(fields: [prestamoId], references: [id])
+}
+
+model Transacciones {
+  id          Int      @id @default(autoincrement())
+  fecha       DateTime
+  monto       Float
+  descripcion String
+  userId      Int
+  cuotaId     Int
+  Cuotas      Cuotas   @relation(fields: [cuotaId], references: [id])
+}
