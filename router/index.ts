@@ -1,5 +1,7 @@
 import { Router, Express } from "express";
 import userRouter from './user-router';
+import pagosRouter from "./pagos-router";
+import prestamosRouter from "./prestamos-router";
 
 const rootRouter = Router();
 rootRouter.all('*', (_, res) => {
@@ -7,7 +9,9 @@ rootRouter.all('*', (_, res) => {
 });
 
 const setRouting = (app: Express): void => {
-  app.use("/user", userRouter);
+  app.use("/usuarios", userRouter);
+  app.use("/pagos", pagosRouter);
+  app.use("/prestamos", prestamosRouter);
   app.use(rootRouter);
 };
 
