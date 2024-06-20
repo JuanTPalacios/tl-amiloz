@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { bootServer } from "./server";
+import { bootServer } from "./src/server";
 
 dotenv.config();
 
