@@ -14,16 +14,17 @@ datasource db {
 }
 
 model Usuarios {
-  id         Int         @id @default(autoincrement())
-  nombre     String
-  contrasena String
-  apellido   String
-  email      String
-  telefono   String
-  rolId      Int
-  Ofertas    Ofertas[]
-  Prestamos  Prestamos[]
-  Roles      Roles       @relation(fields: [rolId], references: [id])
+  id            Int             @id @default(autoincrement())
+  nombre        String
+  contrasena    String
+  apellido      String
+  email         String
+  telefono      String
+  rolId         Int
+  Ofertas       Ofertas[]
+  Prestamos     Prestamos[]
+  Transacciones Transacciones[]
+  Roles         Roles           @relation(fields: [rolId], references: [id])
 }
 
 model Roles {
@@ -71,13 +72,15 @@ model Cuotas {
 }
 
 model Transacciones {
-  id             Int      @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   billingReceipt String //  id de transaccion en stripe o proveedor de pagos para agrupar transacciones de 1 abono
   fecha          DateTime
   monto          Float
   descripcion    String
   userId         Int
   cuotaId        Int
-  reverted       Boolean  @default(false)
-  Cuotas         Cuotas   @relation(fields: [cuotaId], references: [id])
+  reverted       Boolean   @default(false)
+  Cuotas         Cuotas    @relation(fields: [cuotaId], references: [id])
+  Usuarios       Usuarios? @relation(fields: [usuariosId], references: [id])
+  usuariosId     Int?
 }
