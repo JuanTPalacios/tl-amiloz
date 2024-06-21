@@ -64,5 +64,7 @@ CREATE TABLE "Transacciones" (
     "userId" INTEGER NOT NULL,
     "cuotaId" INTEGER NOT NULL,
     "reverted" BOOLEAN NOT NULL DEFAULT false,
-    CONSTRAINT "Transacciones_cuotaId_fkey" FOREIGN KEY ("cuotaId") REFERENCES "Cuotas" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "usuariosId" INTEGER,
+    CONSTRAINT "Transacciones_cuotaId_fkey" FOREIGN KEY ("cuotaId") REFERENCES "Cuotas" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Transacciones_usuariosId_fkey" FOREIGN KEY ("usuariosId") REFERENCES "Usuarios" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );

@@ -196,3 +196,51 @@ Al concluir, envíanos la liga de tu fork para poder probarlo.
 
 ¡Buena Suerte!
 ¡Gracias por tu participación!
+
+### Instrucciones de uso
+
+## 1. Agrega un .env en la raíz del proyecto con las siguientes variables de entorno
+
+```
+PORT = 3000
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="secret_key"
+```
+
+## 2. Instala las dependencias
+
+```
+npm install
+```
+
+## 3. Prisma Generate
+
+Si deseas utilizar la base de Sqlite que se encuentra en el repositorio, ejecuta el siguiente comando para generar los modelos de la base de datos.
+
+```
+prisma generate --schema=./src/prisma/schema.prisma
+```
+
+De lo contrario, si deseas utilizar tu propia base de datos, modifica el archivo schema.prisma y ejecuta el siguiente comando.
+
+```
+prisma generate
+prisma migrate dev
+```
+
+Esto generará la nueva base y hará el seed del ussuario administrador.
+
+## 4. Corre el proyecto
+
+```
+npm run dev
+```
+
+## Comentarios adicionales
+
+Para utilizar el usuario administrador que se crea en la base en el seed puede utilizar estas credenciales:
+
+correo: admin@mail.com
+contraseña: admin
+
+En el archivo ERD.md se encuentra el diagrama de la base de datos y el detalle de cada tabla y columna de la base.
