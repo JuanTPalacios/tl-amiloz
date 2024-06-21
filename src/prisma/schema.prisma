@@ -7,19 +7,20 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model Usuarios {
-  id        Int         @id @default(autoincrement())
-  nombre    String
-  apellido  String
-  email     String
-  telefono  String
-  rolId     Int
-  Ofertas   Ofertas[]
-  Prestamos Prestamos[]
-  Roles     Roles       @relation(fields: [rolId], references: [id])
+  id         Int         @id @default(autoincrement())
+  nombre     String
+  contrasena String
+  apellido   String
+  email      String
+  telefono   String
+  rolId      Int
+  Ofertas    Ofertas[]
+  Prestamos  Prestamos[]
+  Roles      Roles       @relation(fields: [rolId], references: [id])
 }
 
 model Roles {
