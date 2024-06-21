@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { addOffer, addPrestamo, createUser, logInUser } from "../controllers/user";
 import { validateData } from "../middleware/zod-validation";
-import { offerCreationSchema, prestamoCreationSchema, userCreationSchema, userLogInSchema } from "../schemas/userSchemas";
+import { userCreationSchema, userLogInSchema } from "../schemas/userSchemas";
+import { offerCreationSchema, prestamoCreationSchema } from "../schemas/prestamosSchemas";
 import { authMiddleware } from "../middleware/authMiddleware";
 import isAdminUserMiddleware from "../middleware/isAdminMiddleware";
 
@@ -16,7 +17,7 @@ userRouter.post(
   isAdminUserMiddleware,
   addOffer
 );
-// no es necesariouserId en params ya que se obtiene del token
+// no es necesario userId en params ya que se obtiene del token
 userRouter.post('/prestamos',
   validateData(prestamoCreationSchema),
   authMiddleware,

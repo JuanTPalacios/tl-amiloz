@@ -68,11 +68,13 @@ model Cuotas {
 }
 
 model Transacciones {
-  id          Int      @id @default(autoincrement())
-  fecha       DateTime
-  monto       Float
-  descripcion String
-  userId      Int
-  cuotaId     Int
-  Cuotas      Cuotas   @relation(fields: [cuotaId], references: [id])
+  id             Int      @id @default(autoincrement())
+  billingReceipt String //  id de transaccion en stripe o proveedor de pagos para agrupar transacciones de 1 abono
+  fecha          DateTime
+  monto          Float
+  descripcion    String
+  userId         Int
+  cuotaId        Int
+  reverted       Boolean  @default(false)
+  Cuotas         Cuotas   @relation(fields: [cuotaId], references: [id])
 }

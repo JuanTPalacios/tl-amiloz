@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { Periodos } from '../utils/types';
 
 export const userCreationSchema = z.object({
   nombre: z.string(),
@@ -12,15 +11,4 @@ export const userCreationSchema = z.object({
 export const userLogInSchema = z.object({
   email: z.string().email(),
   contrasena: z.string(),
-});
-
-export const offerCreationSchema = z.object({
-  titulo: z.string(),
-  monto: z.number(),
-  plazo: z.nativeEnum(Periodos),
-  quotas: z.number()
-});
-
-export const prestamoCreationSchema = z.object({
-  ofertaId: z.number(),
 });
