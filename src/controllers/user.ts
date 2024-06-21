@@ -6,13 +6,6 @@ const prisma = new PrismaClient();
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-
-    let userRole = await prisma.roles.findFirst({
-      where: {
-        nombre: 'user'
-      }
-    });
-    if (!userRole) throw new Error('Role user not found');
     const {
       nombre,
       email,
@@ -20,6 +13,21 @@ export const createUser = async (req: Request, res: Response) => {
       contrasena,
       telefono
     } = req.body;
+
+    const checkUser = await prisma.usuarios.findFirst({
+      where: {
+        email: req.body.email
+      }
+    });
+    if (checkUser) throw new Error('User already exists');
+
+    let userRole = await prisma.roles.findFirst({
+      where: {
+        nombre: 'user'
+      }
+    });
+    if (!userRole) throw new Error('Role user not found');
+    
     const hashedPassword = await bcrypt.hash(contrasena, 10);
     const user = await prisma.usuarios.create({ 
       data: {
@@ -31,9 +39,9 @@ export const createUser = async (req: Request, res: Response) => {
         rolId: userRole.id
       }
     });
-    res.status(201).json(user);
+    res.status(201).json({ success: true, user });
   } catch (e) {
     console.log(e);
-    res.status(500).json({ error: 'There was an error creating user' });
+    res.status(500).json({ success: false, error: 'There was an error creating user' });
   }
 };

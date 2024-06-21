@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import setRouting from './router';
+import bodyParser from 'body-parser';
 
 export const bootServer = (port: number): http.Server => {
   const corsConfig = {
@@ -11,7 +12,7 @@ export const bootServer = (port: number): http.Server => {
   };
   const app = express();
   app.use(morgan("dev"));
-  app.use(express.json());
+  app.use(bodyParser.json());
   app.use(cors(corsConfig));
 
   setRouting(app);
