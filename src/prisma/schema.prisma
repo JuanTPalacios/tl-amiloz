@@ -1,3 +1,9 @@
+// generator markdown {
+//   provider = "prisma-markdown"
+//   output   = "./ERD.md"
+//   title    = "ERD DB Amiloz"
+// }
+
 generator client {
   provider = "prisma-client-js"
 }
