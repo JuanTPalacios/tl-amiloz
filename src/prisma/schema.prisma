@@ -36,7 +36,6 @@ model Ofertas {
   monto     Int
   plazo     String
   quotas    Int
-  interes   Float
   userId    Int
   Prestamos Prestamos[]
   Usuarios  Usuarios    @relation(fields: [userId], references: [id])

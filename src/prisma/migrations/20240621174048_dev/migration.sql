@@ -24,7 +24,6 @@ CREATE TABLE "Ofertas" (
     "monto" INTEGER NOT NULL,
     "plazo" TEXT NOT NULL,
     "quotas" INTEGER NOT NULL,
-    "interes" REAL NOT NULL,
     "userId" INTEGER NOT NULL,
     CONSTRAINT "Ofertas_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Usuarios" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );

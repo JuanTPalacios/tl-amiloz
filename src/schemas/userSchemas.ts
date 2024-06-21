@@ -11,13 +11,16 @@ export const userCreationSchema = z.object({
 
 export const userLogInSchema = z.object({
   email: z.string().email(),
-  contrasena: z.string().min(8),
+  contrasena: z.string(),
 });
 
 export const offerCreationSchema = z.object({
   titulo: z.string(),
   monto: z.number(),
   plazo: z.nativeEnum(Periodos),
-  quotas: z.number(),
-  interes: z.number(),
+  quotas: z.number()
+});
+
+export const prestamoCreationSchema = z.object({
+  ofertaId: z.number(),
 });
